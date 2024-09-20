@@ -9,6 +9,7 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -34,4 +35,7 @@ public class PaymentModel implements Serializable {
 
     @Column
     private Double amount;
+
+    @Column
+    private LocalDateTime payedAt;
 }
