@@ -1,6 +1,6 @@
 package org.example.paymentapi.model;
 
-public enum PaymentStatusModel {
+public enum PaymentStatus {
     PENDING,
     APPROVED,
     DENIED,
