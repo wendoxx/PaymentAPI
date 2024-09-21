@@ -28,7 +28,7 @@ public class PaymentModel implements Serializable {
     private String cardHolderName;
 
     @Column
-    private LocalDate expirationDate;
+    private LocalDate cardExpirationDate;
 
     @Column
     private String cvv;
