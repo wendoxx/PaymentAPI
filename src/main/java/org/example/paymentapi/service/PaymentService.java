@@ -35,8 +35,14 @@ public class PaymentService {
         return modelMapper.map(paymentRepository.findAll(), List.class);
     }
 
-    public PaymentResponseDTO savePayment(PaymentRequestDTO paymentRequestDTO) {
-        PaymentModel payment = modelMapper.map(paymentRequestDTO, PaymentModel.class);
+    public PaymentResponseDTO saveAndUpdatePayment(PaymentRequestDTO paymentRequestDTO) {
+        PaymentModel payment;
+        if (paymentRequestDTO.getId() != null && paymentRepository.existsById(paymentRequestDTO.getId())){
+            payment = paymentRepository.findById(paymentRequestDTO.getId()).orElseThrow(() -> new RuntimeException("Payment not found"));
+
+        }else {
+            payment = new PaymentModel();
+        }
 
         payment.setCardNumber(paymentRequestDTO.getCardNumber());
         payment.setCardHolder(paymentRequestDTO.getCardHolder());
@@ -47,9 +53,12 @@ public class PaymentService {
         return modelMapper.map(paymentRepository.save(payment), PaymentResponseDTO.class);
     }
 
-    public PaymentResponseDTO updatePayment(UUID id, PaymentModel paymentModel) {
-        PaymentModel updatedPayment = paymentRepository.save(paymentModel);
-        return modelMapper.map(updatedPayment, PaymentResponseDTO.class);
+    public PaymentResponseDTO savePayment(PaymentRequestDTO paymentRequestDTO) {
+        return saveAndUpdatePayment(paymentRequestDTO);
+    }
+
+    public PaymentResponseDTO updatePayment(PaymentRequestDTO paymentRequestDTO) {
+        return saveAndUpdatePayment(paymentRequestDTO);
     }
 
     public void deletePayment(UUID id) {

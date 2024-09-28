@@ -18,12 +18,12 @@ public class PaymentController {
     private final PaymentService paymentService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<PaymentResponseDTO> getPaymentById(UUID id){
+    public ResponseEntity<PaymentResponseDTO> getPaymentById(@PathVariable UUID id){
         return ResponseEntity.ok(paymentService.findPaymentById(id));
     }
 
     @GetMapping("/{cardNumber}")
-    public ResponseEntity<PaymentResponseDTO> getPaymentByCardNumber(String cardNumber){
+    public ResponseEntity<PaymentResponseDTO> getPaymentByCardNumber(@PathVariable String cardNumber){
         return ResponseEntity.ok(paymentService.findPaymentByCardNumber(cardNumber));
     }
 
@@ -32,13 +32,24 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.findAllPayments());
     }
 
-    @GetMapping("/{cardHolderName}")
-    public ResponseEntity<PaymentResponseDTO> getPaymentByCardHolder(String cardHolder){
+    @GetMapping("/{cardHolder}")
+    public ResponseEntity<PaymentResponseDTO> getPaymentByCardHolder(@PathVariable String cardHolder){
         return ResponseEntity.ok(paymentService.findPaymentByCardHolder(cardHolder));
     }
 
     @PostMapping
     public ResponseEntity<PaymentResponseDTO> savePayment(@RequestBody PaymentRequestDTO paymentRequestDTO){
         return ResponseEntity.status(201).body(paymentService.savePayment(paymentRequestDTO));
+    }
+
+    @PutMapping
+    public ResponseEntity<PaymentResponseDTO> updatePayment(@RequestBody PaymentRequestDTO paymentRequestDTO){
+        return ResponseEntity.ok(paymentService.updatePayment(paymentRequestDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePayment(@PathVariable UUID id){
+        paymentService.deletePayment(id);
+        return ResponseEntity.noContent().build();
     }
 }
