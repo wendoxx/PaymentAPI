@@ -1,15 +1,13 @@
 package org.example.paymentapi.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -19,23 +17,24 @@ public class PaymentModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
-    @Column
+    @Column(name = "card_number")
     private String cardNumber;
 
-    @Column
-    private String cardHolderName;
+    @Column(name = "card_holder")
+    private String cardHolder;
 
-    @Column
+    @Column(name = "card_expiration_date")
     private LocalDate cardExpirationDate;
 
-    @Column
+    @Column(name = "cvv")
     private String cvv;
 
-    @Column
+    @Column(name = "amount")
     private Double amount;
 
-    @Column
-    private LocalDateTime payedAt;
+    @Column(name = "payed_at")
+    private LocalDateTime payedAt = LocalDateTime.now();
 }
