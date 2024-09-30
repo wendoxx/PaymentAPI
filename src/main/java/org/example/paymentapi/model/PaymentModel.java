@@ -37,4 +37,8 @@ public class PaymentModel implements Serializable {
 
     @Column(name = "payed_at")
     private LocalDateTime payedAt = LocalDateTime.now();
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private PaymentStatus status;
 }
