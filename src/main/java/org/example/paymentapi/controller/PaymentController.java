@@ -22,8 +22,8 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.findPaymentById(id));
     }
 
-    @GetMapping("/{cardNumber}")
-    public ResponseEntity<PaymentResponseDTO> getPaymentByCardNumber(@PathVariable String cardNumber){
+    @GetMapping("/cardNumber")
+    public ResponseEntity<PaymentResponseDTO> getPaymentByCardNumber(@RequestParam String cardNumber){
         return ResponseEntity.ok(paymentService.findPaymentByCardNumber(cardNumber));
     }
 
@@ -32,8 +32,8 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.findAllPayments());
     }
 
-    @GetMapping("/{cardHolder}")
-    public ResponseEntity<PaymentResponseDTO> getPaymentByCardHolder(@PathVariable String cardHolder){
+    @GetMapping("/cardHolder")
+    public ResponseEntity<PaymentResponseDTO> getPaymentByCardHolder(@RequestParam String cardHolder){
         return ResponseEntity.ok(paymentService.findPaymentByCardHolder(cardHolder));
     }
 
