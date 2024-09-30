@@ -16,4 +16,5 @@ public class PaymentResponseDTO {
     private String cvv;
     private Double amount;
     private LocalDateTime payedAt = LocalDateTime.now();
+    private String status;
 }
